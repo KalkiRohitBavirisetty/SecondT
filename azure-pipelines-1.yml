@@ -35,12 +35,7 @@ jobs:
       ConnectedServiceName: 1d93d396-d728-4591-8d1a-0092f61e04e8
       command: restore
       projects: $(BuildParameters.RestoreBuildProjects)
-  - task: CmdLine@2
-    inputs:
-          script: |
-            echo Artifact staging directory-Hello world-1
-            echo  $(Build.ArtifactStagingDirectory)
-            echo Hello world-1
+  
   - task: DotNetCoreCLI@2
     displayName: Build
     inputs:
@@ -82,12 +77,7 @@ jobs:
         downloadType: 'single'
         artifactName: 'drop'
         downloadPath: '$(build.artifactstagingdirectory)' #'$(Build.SourcesDirectory)'
-    - task: CmdLine@2
-      inputs:
-          script: |
-            echo Hello world-2
-            echo  $(Build.SourcesDirectory)
-            echo Hello world-2
+    
     # Step 2: Copy Web API files to IIS server folder
     - task: ExtractFiles@1
       displayName: 'Extract published files'
@@ -100,14 +90,4 @@ jobs:
         SourceFolder: '$(build.artifactstagingdirectory)/extracted' #'$(buildOutputFolder)/webapi'
         Contents: '**'
         TargetFolder: 'C:\inetpub\wwwroot\newfolder'  # Change this path to your IIS folder   
-    - task: CmdLine@2
-      inputs:
-          script: |
-            echo Artifact staging directory-Hello world-3
-            echo  $(Build.ArtifactStagingDirectory)
-            echo Hello world-3
-
-            echo Sources Directory- Hello world-3
-            echo  $(Build.SourcesDirectory)
-            echo Hello world-3
-...
+    
