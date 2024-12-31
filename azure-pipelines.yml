@@ -29,14 +29,6 @@ jobs:
       projects: $(BuildParameters.RestoreBuildProjects)
       arguments: --configuration $(BuildConfiguration)
   - task: DotNetCoreCLI@2
-    displayName: Test
-    enabled: False
-    inputs:
-      ConnectedServiceName: 1d93d396-d728-4591-8d1a-0092f61e04e8
-      command: test
-      projects: $(BuildParameters.TestProjects)
-      arguments: --configuration $(BuildConfiguration)
-  - task: DotNetCoreCLI@2
     displayName: Publish
     inputs:
       ConnectedServiceName: 1d93d396-d728-4591-8d1a-0092f61e04e8
@@ -51,4 +43,10 @@ jobs:
     inputs:
       PathtoPublish: $(build.artifactstagingdirectory)
       TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
+  - task: CmdLine@2
+    inputs:
+     script: |
+      echo Write your commands here
+      
+      echo Hello world
 ...
